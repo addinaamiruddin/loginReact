@@ -1,75 +1,178 @@
-import { View, Text, StyleSheet, TextInput, ActivityIndicator, Button, KeyboardAvoidingView } from 'react-native'
-import React, { useState } from 'react'
 import { FIREBASE_AUTH } from '../../firebaseConfig';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { View, Text, Image , Pressable, TextInput, TouchableOpacity } from 'react-native'
+import React, { useState } from 'react'
+import { SafeAreaView } from "react-native-safe-area-context";
+import COLORS from './constants/COLORS'
+import { Ionicons } from "@expo/vector-icons";
+import Checkbox from "expo-checkbox"
+import Button from './components/Button';
+import Header from './Header';
 
-const Login = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [loading, setLoading] = useState(false);
-    const auth = FIREBASE_AUTH;
-    
-    const signIn = async () => {
-        setLoading(true);
-        try {
-          const response = await signInWithEmailAndPassword(auth, email, password);
-          console.log(response);
-          alert('Sign in success');
-        } catch (error:any) {
-          console.log(error);
-          alert('Sign in failed : '+error.message);
-        } finally {
-          setLoading(false);
-        }
-    }
 
-    const signUp = async () => {
-      setLoading(true);
-      try {
-        const response = await createUserWithEmailAndPassword(auth, email, password);
-        console.log(response);
-        alert('Sign up success');
-      } catch (error:any) {
-        console.log(error);
-        alert('Sign up failed : '+error.message);
-      } finally {
-        setLoading(false);
-      }
-  }
+const Login = ({navigation}:any) => {
+  const [isPasswordShown, setIsPasswordShown] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+  
   return (
-    <View style={styles.container}>
-      <KeyboardAvoidingView behavior='padding'>
-      <TextInput value={email} style={styles.input} placeholder='Email' autoCapitalize='none' onChangeText={(text)=>setEmail(text)}></TextInput>
-      <TextInput secureTextEntry={true} value={password} style={styles.input} placeholder='Password' autoCapitalize='none' onChangeText={(text)=>setPassword(text)}></TextInput>
+      <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
+        <><Header />
+          <View style={{ flex: 1, marginHorizontal: 22 }}>
+              <View style={{ marginVertical: 22 }}>
+                  <Text style={{
+                      fontSize: 22,
+                      fontWeight: 'bold',
+                      marginVertical: 12,
+                      color: COLORS.black
+                  }}>
+                      Hi Welcome Back ! 👋
+                  </Text>
 
-      {loading ? (
-      <ActivityIndicator size="large" color="#0000ff" />
-      ) : ( 
-      <> 
-      <Button title='Login' onPress={signIn}/>
-      <Button title='Create Account' onPress={signUp}/>
+                  <Text style={{
+                      fontSize: 16,
+                      color: COLORS.black
+                  }}>Hello again you have been missed!</Text>
+              </View>
 
-      </>
-    )}
-    </KeyboardAvoidingView>
-    </View>
+              <View style={{ marginBottom: 12 }}>
+                  <Text style={{
+                      fontSize: 16,
+                      fontWeight: '400',
+                      marginVertical: 8
+                  }}>Email address</Text>
+
+                  <View style={{
+                      width: "100%",
+                      height: 48,
+                      borderColor: COLORS.black,
+                      borderWidth: 1,
+                      borderRadius: 8,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      paddingLeft: 22
+                  }}>
+                      <TextInput
+                          placeholder='Enter your email address'
+                          placeholderTextColor={COLORS.black}
+                          keyboardType='email-address'
+                          style={{
+                              width: "100%"
+                          }}
+                      />
+                  </View>
+              </View>
+
+              <View style={{ marginBottom: 12 }}>
+                  <Text style={{
+                      fontSize: 16,
+                      fontWeight: '400',
+                      marginVertical: 8
+                  }}>Password</Text>
+
+                  <View style={{
+                      width: "100%",
+                      height: 48,
+                      borderColor: COLORS.black,
+                      borderWidth: 1,
+                      borderRadius: 8,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      paddingLeft: 22
+                  }}>
+                      <TextInput
+                          placeholder='Enter your password'
+                          placeholderTextColor={COLORS.black}
+                          secureTextEntry={isPasswordShown}
+                          style={{
+                              width: "100%"
+                          }}
+                      />
+
+                      <TouchableOpacity
+                          onPress={() => setIsPasswordShown(!isPasswordShown)}
+                          style={{
+                              position: "absolute",
+                              right: 12
+                          }}
+                      >
+                          {
+                              isPasswordShown == true ? (
+                                  <Ionicons name="eye-off" size={24} color={COLORS.black} />
+                              ) : (
+                                  <Ionicons name="eye" size={24} color={COLORS.black} />
+                              )
+                          }
+
+                      </TouchableOpacity>
+                  </View>
+              </View>
+
+              <View style={{
+                  flexDirection: 'row',
+                  marginVertical: 6
+              }}>
+                  <Checkbox
+                      style={{ marginRight: 8 }}
+                      value={isChecked}
+                      onValueChange={setIsChecked}
+                      color={isChecked ? COLORS.primary : undefined}
+                  />
+
+                  <Text>Remenber Me</Text>
+              </View>
+
+              <Button
+                  title="Login"
+                  filled
+                  style={{
+                      marginTop: 18,
+                      marginBottom: 4,
+                  }}
+              />
+
+              <View style={{
+                  flexDirection: 'row',
+                  justifyContent: 'center'
+              }}>
+                 
+              </View>
+
+              <View style={{
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  marginVertical: 22
+              }}>
+                  <Text style={{ fontSize: 16, color: COLORS.black }}>Don't have an account ? </Text>
+                  <Pressable
+                      onPress={() => navigation.navigate("Signup")}
+                  >
+                      <Text style={{
+                          fontSize: 16,
+                          color: COLORS.primary,
+                          fontWeight: "bold",
+                          marginLeft: 6
+                      }}>Register</Text>
+                  </Pressable>
+              </View>
+          </View>
+          </>
+      </SafeAreaView>
   )
 }
-
 export default Login;
 
-const styles = StyleSheet.create({
-    container: {
-        marginHorizontal:20,
-        flex:1,
-        justifyContent:'center'
-    },
-    input: {
-        marginVertical:4,
-        height:50,
-        borderWidth:1,
-        borderRadius:4,
-        padding:10,
-        backgroundColor:'#fff'
-    }
-});
+// const styles = StyleSheet.create({
+//     container: {
+//         marginHorizontal:20,
+//         flex:1,
+//         justifyContent:'center'
+//     },
+//     input: {
+//         marginVertical:4,
+//         height:50,
+//         borderWidth:1,
+//         borderRadius:4,
+//         padding:10,
+//         backgroundColor:'#fff'
+//     }
+// });
