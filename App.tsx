@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import Login from './app/screens/Login';
-import List from './app/screens/List';
+import SignUp from './app/screens/SignUp';
 import Details from './app/screens/Details';
 import { useEffect, useState } from 'react';
 import { User, onAuthStateChanged } from 'firebase/auth';
@@ -15,7 +15,7 @@ const InsideStack = createNativeStackNavigator();
 function InsideLayout() {
   return (
     <InsideStack.Navigator>
-      <InsideStack.Screen name='My todos' component={List}/>
+      <InsideStack.Screen name='My todos' component={SignUp}/>
       <InsideStack.Screen name='Details' component={Details}/>
 
     </InsideStack.Navigator>
