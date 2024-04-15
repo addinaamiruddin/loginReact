@@ -209,4 +209,4 @@ const SignUp = ({navigation}:any) => {
     )
 };
 
-export default SignUp
+export default SignUp;
