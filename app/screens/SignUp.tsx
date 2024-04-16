@@ -169,6 +169,7 @@ const SignUp = ({navigation}:any) => {
 
           <Button
             title="Sign Up"
+            onPress={() => navigation.navigate("Dashboard")}
             filled
             style={{
               marginTop: 18,
@@ -177,7 +178,7 @@ const SignUp = ({navigation}:any) => {
 
           <View style={{ flexDirection: "row", justifyContent: "flex-start", marginVertical: 15 }}>
             <Pressable
-              onPress={() => navigation.navigate("Login")} //to update
+              onPress={() => navigation.navigate("Login")} // to update forgot password
             >
               <Text style={{
                 fontSize: 16,

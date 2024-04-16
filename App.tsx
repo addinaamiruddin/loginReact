@@ -6,6 +6,7 @@ import Login from './app/screens/Login';
 import SignUp from './app/screens/SignUp';
 import Details from './app/screens/Details';
 import Welcome from './app/screens/Welcome';
+import Dashboard from './app/screens/Dashboard';
 import { useEffect, useState } from 'react';
 import { User, onAuthStateChanged } from 'firebase/auth';
 import { FIREBASE_AUTH } from './firebaseConfig';
@@ -59,6 +60,12 @@ export default function App() {
               headerShown: false
             }}
           />
+          <Stack.Screen
+          name="Dashboard"
+          component={Dashboard}
+          options={{
+            headerShown:false
+          }}/>
         </Stack.Navigator>
       </NavigationContainer>
     );

@@ -40,12 +40,11 @@ const Welcome = ({ navigation }: any) => {
 
           <Button
             title="Sign Up"
-            onPress={() => navigation.navigate("SignUp")}
+            onPress={() => navigation.navigate("Signup")}
+            filled
             style={{
-              marginTop: 22,
-              width: "100%",
-              backgroundColor: COLORS.primary,
-              color: COLORS.white,
+              marginTop: 18,
+              marginBottom: 4,
             }}
           />
 
@@ -69,11 +68,10 @@ const Welcome = ({ navigation }: any) => {
             <Button
               title="Login"
               onPress={() => navigation.navigate("Login")}
+              filled
               style={{
-                marginTop: 22,
-                width: "100%",
-                backgroundColor: COLORS.primary,
-                color: COLORS.white,
+                marginTop: 18,
+                marginBottom: 4,
               }}
             />
           </View>
