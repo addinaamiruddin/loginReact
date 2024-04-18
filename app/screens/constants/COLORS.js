@@ -3,7 +3,7 @@ const COLORS = {
     black: "#222222",
     primary: "#789461",
     secondary: "#dbe7c9",
-    grey: "#CCCCCC"
+    gray: "#e9e9e9"
 }
 
 export default COLORS;
