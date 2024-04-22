@@ -26,26 +26,22 @@ const Login = ({ navigation }: any) => {
   const [loading, setLoading] = useState(false);
   const auth = FIREBASE_AUTH;
 
-  
+  const signIn = async () => {
+    setLoading(true);
+    try {
+      const response = await signInWithEmailAndPassword(auth, email, password);
+      console.log(response);
+      navigation.navigate("LandingPage");
+    } catch (error: any) {
+      console.log(error);
+      alert("Sign in failed: " + error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  
-const signIn= async () => {
-  setLoading (true);
-  try {
-  const response = await signInWithEmailAndPassword(auth, email, password);
-  console.log(response);
-  } catch (error: any) {
-  console.log(error);
-  alert('Sign in failed: '+ error.message);
-  } finally {
-  setLoading(false);
-  }
-}
-  
-const [isChecked, setIsChecked] = useState(false);
-const [isPasswordShown, setIsPasswordShown] = useState(false);
-
-  
+  const [isChecked, setIsChecked] = useState(false);
+  const [isPasswordShown, setIsPasswordShown] = useState(false);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>

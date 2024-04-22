@@ -17,14 +17,12 @@ import Header from "./Header";
 import { FIREBASE_AUTH } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
-
 interface RouterProps {
   navigation: NavigationProp<any, any>;
 }
 
-
 const SignUp = ({ navigation }: any) => {
-  const [isPasswordShown, setIsPasswordShown] = useState(false);
+  const [isPasswordShown, setIsPasswordShown] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -38,22 +36,26 @@ const SignUp = ({ navigation }: any) => {
   });
 
   const signUp = async () => {
-    setLoading (true);
+    setLoading(true);
     try {
-      const response = await createUserWithEmailAndPassword (auth, email, password);
+      const response = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       console.log(response);
-      alert('Check your emails!');
-      } catch (error: any) {
+      alert("Sign Up successful.");
+    navigation.navigate("LandingPage");
+
+    } catch (error: any) {
       console.log(error);
-      alert('Sign in failed: '+error.message);
+      alert("Sign in failed: " + error.message);
     } finally {
-      setLoading (false);
+      setLoading(false);
     }
 
-    navigation.navigate("LandingPage")
-  }
+  };
 
-  const [isChecked, setIsChecked] = useState(false);
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <>
