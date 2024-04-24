@@ -16,7 +16,7 @@ interface RouterProps {
   navigation: NavigationProp<any, any>;
 }
 
-const Dashboard = ({ navigation }) => {
+const Dashboard = ({ navigation }: any) => {
   const goToUserProfile = () => {
     navigation.navigate("UserProfile");
   };
