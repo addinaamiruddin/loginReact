@@ -1,12 +1,25 @@
 import React, { useState } from "react";
 import { ScrollView, SafeAreaView, View, Text, StyleSheet } from "react-native";
 import COLORS from "./constants/COLORS";
-import Button from "./components/Button";
 import Header2 from "./Header2";
-import Dashboard from "./Dashboard";
+import ButtonChapter from "./components/ButtonChapter";
 
 const LandingPage = ({ navigation }: any) => {
-  const [isPasswordShown, setIsPasswordShown] = useState(false);
+  // Define the function handlers for the icons
+  const handleFlashcardsPress = () => {
+    console.log("Flashcards icon pressed");
+    // Add your navigation logic or other actions here
+  };
+
+  const handleSlideshowsPress = () => {
+    console.log("Slideshows icon pressed");
+    // Add your navigation logic or other actions here
+  };
+
+  const handleExperimentsPress = () => {
+    console.log("Experiments icon pressed");
+    // Add your navigation logic or other actions here
+  };
 
   const styles = StyleSheet.create({
     scrollViewContent: {
@@ -15,7 +28,6 @@ const LandingPage = ({ navigation }: any) => {
     },
   });
 
-  const [isChecked, setIsChecked] = useState(false);
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <>
@@ -30,40 +42,43 @@ const LandingPage = ({ navigation }: any) => {
                   marginVertical: 8,
                   alignSelf: "center",
                   marginTop: 50,
+                  marginBottom: 30,
                 }}
               >
                 What do you want to do today?
               </Text>
             </View>
 
-            <Button
-              title="Flashcards"
-              onPress={() => navigation.navigate("Chapters")}
-              filled
-              style={{
-                marginTop: 18,
-                marginBottom: 4,
-              }}
+            <ButtonChapter
+              title="1 Organisation of Plant Tissues and Growth"
+              onPress={() => navigation.navigate('ActivityPage', { title: 'Chapter 1 : Organisation of Plant Tissues and Growth' })}              flashcardsAvailable={true}
+              slideshowsAvailable={true}
+              experimentsAvailable={true}
+              onFlashcardsPress={handleFlashcardsPress}
+              onSlideshowsPress={handleSlideshowsPress}
+              onExperimentsPress={handleExperimentsPress}
             />
 
-            <Button
-              title="Slideshows"
-              onPress={() => navigation.navigate("Chapters")}
-              filled
-              style={{
-                marginTop: 18,
-                marginBottom: 4,
-              }}
+            <ButtonChapter
+              title="2 Leaf Structure and Function"
+              onPress={() => console.log("Chapter 1 button pressed")}
+              flashcardsAvailable={true}
+              slideshowsAvailable={true}
+              experimentsAvailable={true}
+              onFlashcardsPress={handleFlashcardsPress}
+              onSlideshowsPress={handleSlideshowsPress}
+              onExperimentsPress={handleExperimentsPress}
             />
 
-            <Button
-              title="Experiment Simulation"
-              onPress={() => navigation.navigate("Chapters")}
-              filled
-              style={{
-                marginTop: 18,
-                marginBottom: 4,
-              }}
+            <ButtonChapter
+              title="3 Nutrition of Plants"
+              onPress={() => console.log("Chapter 1 button pressed")}
+              flashcardsAvailable={true}
+              slideshowsAvailable={true}
+              experimentsAvailable={false}
+              onFlashcardsPress={handleFlashcardsPress}
+              onSlideshowsPress={handleSlideshowsPress}
+              onExperimentsPress={handleExperimentsPress}
             />
           </View>
         </SafeAreaView>
