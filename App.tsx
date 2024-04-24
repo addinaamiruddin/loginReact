@@ -13,6 +13,7 @@ import { FIREBASE_AUTH } from "./firebase";
 import LandingPage from "./app/screens/LandingPage";
 import UserProfile from "./app/screens/UserProfile";
 import Chapters from "./app/screens/Chapters";
+import ActivityPage from "./app/screens/ActivityPage";
 
 const Stack = createNativeStackNavigator();
 const InsideStack = createNativeStackNavigator();
@@ -87,6 +88,11 @@ export default function App() {
           options={{
             headerShown: false,
           }}
+        />
+        <Stack.Screen
+          name="ActivityPage"
+          component={ActivityPage}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>
