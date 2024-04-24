@@ -53,6 +53,7 @@ const SignUp = ({ navigation }: any) => {
     } finally {
       setLoading(false);
     }
+    navigation.navigate("LandingPage"); // for testing
 
   };
 
