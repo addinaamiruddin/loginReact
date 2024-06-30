@@ -45,7 +45,7 @@ const ActivityPage = ({ navigation, route }) => {
 
                         <Button
                             title="Flashcards"
-                            onPress={() => navigation.navigate('Chapters')}
+                            onPress={() =>   navigation.navigate('openFlashcards', { id: 1 })} // nanti tukar id to chapter_id
                             filled
                             style={{
                                 marginTop: 18,
@@ -58,7 +58,7 @@ const ActivityPage = ({ navigation, route }) => {
 
                         <Button
                             title="Slideshows"
-                            onPress={() => navigation.navigate('Chapters')}
+                            onPress={() => navigation.navigate('openSlideshows')}
                             filled
                             style={{
                                 marginTop: 18,
@@ -71,7 +71,7 @@ const ActivityPage = ({ navigation, route }) => {
 
                         <Button
                             title="Experiment Simulation"
-                            onPress={() => navigation.navigate('Chapters')}
+                            onPress={() => navigation.navigate('openExperiment', { id: 1 })}
                             filled
                             style={{
                                 marginTop: 18,

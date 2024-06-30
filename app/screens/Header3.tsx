@@ -2,9 +2,9 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import userImage from '../screens/assets/user.png';
 
-const Header2 = ({ navigation }) => {
+const Header3 = ({ navigation }) => {
   const goToDashboard = () => {
-    navigation.navigate('LandingPage');
+    navigation.navigate('TeacherDashboard');
   };
 
   return (
@@ -62,4 +62,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Header2;
+export default Header3;

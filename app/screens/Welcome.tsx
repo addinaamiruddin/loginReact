@@ -6,6 +6,7 @@ import Button from "./components/Button";
 import Header from "./Header";
 import Login from "./Login";
 import SignUp from "./SignUp";
+import App from "../../App";
 
 const Welcome = ({ navigation }: any) => {
   return (
@@ -46,6 +47,7 @@ const Welcome = ({ navigation }: any) => {
               marginTop: 18,
               marginBottom: 4,
             }}
+            
           />
 
           <View

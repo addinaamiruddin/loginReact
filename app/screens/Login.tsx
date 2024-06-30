@@ -1,49 +1,72 @@
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import React, { useState } from 'react'
+import { supabase } from '../lib/supabase'
 import {
   View,
   Text,
-  Image,
   Pressable,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
+  Alert,
+  AppState,
+  ScrollView
 } from "react-native";
-import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import COLORS from "./constants/COLORS";
+import COLORS from "../screens/constants/COLORS";
 import { Ionicons } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
-import Button from "./components/Button";
-import Header from "./Header";
-import { FIREBASE_AUTH } from "../../firebase";
+import Button from "../screens/components/Button";
+import Header from "../screens/Header";
+import { Session } from "@supabase/supabase-js";
+
+AppState.addEventListener('change', (state) => {
+  if (state === 'active') {
+    supabase.auth.startAutoRefresh()
+  } else {
+    supabase.auth.stopAutoRefresh()
+  }
+})
 
 const Login = ({ navigation }: any) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const auth = FIREBASE_AUTH;
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  const signIn = async () => {
-    setLoading(true);
-    try {
-      const response = await signInWithEmailAndPassword(auth, email, password);
-      console.log(response);
-      navigation.navigate("LandingPage");
-    } catch (error: any) {
-      console.log(error);
-      alert("Sign in failed: " + error.message);
-    } finally {
+  async function signInWithEmail() {
+    setLoading(true)
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    })
+
+    if (error) {
+      Alert.alert(error.message);
       setLoading(false);
+      return;
     }
+
+    // Successfully logged in
+    // const userName = data.name; // Get the user's name
+    // const userRole = data.role; // Get the user's role
+
+
+    navigation.navigate('LandingPage', data.session); // Navigate to TeacherDashboard
+    console.log(data.session)
+
+    
+    // if (userRole === 'teacher') {
+    //   navigation.navigate('TeacherDashboard'); // Navigate to TeacherDashboard
+    // } else if (userRole === 'student') {
+    //   navigation.navigate('LandingPage'); // Navigate to LandingPage
+    // } 
+    
+    setLoading(false);
   };
 
   const [isChecked, setIsChecked] = useState(false);
   const [isPasswordShown, setIsPasswordShown] = useState(false);
 
   return (
+    <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}>
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <>
         <Header />
@@ -173,7 +196,7 @@ const Login = ({ navigation }: any) => {
           </View>
 
           <Button
-            onPress={() => signIn()}
+            onPress={() => signInWithEmail()}
             title="Login"
             filled
             style={{
@@ -200,6 +223,7 @@ const Login = ({ navigation }: any) => {
               Don't have an account ?{" "}
             </Text>
             <Pressable onPress={() => navigation.navigate("Signup")}>
+              
               <Text
                 style={{
                   fontSize: 16,
@@ -208,6 +232,7 @@ const Login = ({ navigation }: any) => {
                   marginLeft: 6,
                 }}
               >
+                
                 Register
               </Text>
             </Pressable>
@@ -215,6 +240,7 @@ const Login = ({ navigation }: any) => {
         </View>
       </>
     </SafeAreaView>
+    </ScrollView>
   );
 };
 export default Login;

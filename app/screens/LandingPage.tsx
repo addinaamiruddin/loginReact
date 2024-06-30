@@ -1,10 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView, SafeAreaView, View, Text, StyleSheet } from "react-native";
 import COLORS from "./constants/COLORS";
 import Header2 from "./Header2";
 import ButtonChapter from "./components/ButtonChapter";
+import { supabase } from "../lib/supabase";
 
-const LandingPage = ({ navigation }: any) => {
+const LandingPage = ({ route, navigation }: any) => {
+  const [chapters, setChapters] = useState([]);
+  // Inside LandingPage component
+  // const { name, role } = route.params;
+
+  // Now you can use 'name' and 'role' in your component logic
+  // console.log('User name in LandingPage:', name);
+  // console.log('User role in LandingPage:', role);
+
+  useEffect(() => {
+    fetchChapters();
+  }, []);
+
+  const fetchChapters = async () => {
+    const { data, error } = await supabase.from('chapter').select();
+    if (error) console.log("Data fetching error: ", error);
+    else setChapters(data);
+  };
+
   // Define the function handlers for the icons
   const handleFlashcardsPress = () => {
     console.log("Flashcards icon pressed");
@@ -45,41 +64,23 @@ const LandingPage = ({ navigation }: any) => {
                   marginBottom: 30,
                 }}
               >
-                What do you want to do today?
+                Which chapter do you want learn today?
               </Text>
             </View>
 
-            <ButtonChapter
-              title="1 Organisation of Plant Tissues and Growth"
-              onPress={() => navigation.navigate('ActivityPage', { title: 'Chapter 1 : Organisation of Plant Tissues and Growth' })}              flashcardsAvailable={true}
-              slideshowsAvailable={true}
-              experimentsAvailable={true}
-              onFlashcardsPress={handleFlashcardsPress}
-              onSlideshowsPress={handleSlideshowsPress}
-              onExperimentsPress={handleExperimentsPress}
-            />
-
-            <ButtonChapter
-              title="2 Leaf Structure and Function"
-              onPress={() => console.log("Chapter 1 button pressed")}
-              flashcardsAvailable={true}
-              slideshowsAvailable={true}
-              experimentsAvailable={true}
-              onFlashcardsPress={handleFlashcardsPress}
-              onSlideshowsPress={handleSlideshowsPress}
-              onExperimentsPress={handleExperimentsPress}
-            />
-
-            <ButtonChapter
-              title="3 Nutrition of Plants"
-              onPress={() => console.log("Chapter 1 button pressed")}
-              flashcardsAvailable={true}
-              slideshowsAvailable={true}
-              experimentsAvailable={false}
-              onFlashcardsPress={handleFlashcardsPress}
-              onSlideshowsPress={handleSlideshowsPress}
-              onExperimentsPress={handleExperimentsPress}
-            />
+            {chapters.map((chapter, index) => (
+              <ButtonChapter
+                key={index}
+                title={chapter.title}
+                onPress={() => navigation.navigate('ActivityPage', { title: `Chapter ${index + 1} : ${chapter.title}` })}
+                flashcardsAvailable={chapter.fc_exist}
+                slideshowsAvailable={chapter.ss_exist}
+                experimentsAvailable={chapter.exp_exist}
+                onFlashcardsPress={handleFlashcardsPress}
+                onSlideshowsPress={handleSlideshowsPress}
+                onExperimentsPress={handleExperimentsPress}
+              />
+            ))}
           </View>
         </SafeAreaView>
       </>
