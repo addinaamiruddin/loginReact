@@ -1,81 +1,123 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 import Draggable from 'react-native-draggable';
 import Header2 from '../Header2';
 import ArrowButtonNext from '../components/ArrowButtonNext';
 import ArrowButtonPrevious from '../components/ArrowButtonPrevious';
 
-const procedures = [
-  {
-    id: 1,
-    text:
-      '1. Soak the Visking tubing in water for five minutes to soften it. Open the Visking tubing and tie one end with a piece of cotton thread to prevent leakage.',
-      apparatus:['viskingtube', 'beaker']
-  },
-  {
-    id: 2,
-    text:
-      '2. Fill the Visking tubing with 3 ml of glucose solution and 3ml of starch suspension. Tie the other end of the Visking tubing tightly with another piece of cotton thread. Record the colour of the solution.',
-      apparatus:['viskingtubeinbeaker', 'beaker']
-  },
-  {
-    id: 3,
-    text:
-      '3. Rinse the outer surface of the Visking tubing with distilled water.',
-      apparatus:[]
-  },
-  {
-    id: 4,
-    text:
-      '4. Mix 80 ml of water with 3ml of iodine solution in a beaker. Record the colour of the solution.',
-  },
-  {
-    id: 5,
-    text:
-      '5. Place the Visking tubing in the beaker as shown in Figure 3.1 and leave it for 40 minutes.',
-  },
-  {
-    id: 6,
-    text:
-      '6. After 40 minutes, take the Visking tubing out and put it in a dry beaker.',
-  },
-  {
-    id: 7,
-    text:
-      '7. Observe and record the colour of the solutions in the Visking tubing and in the beaker.',
-  },
-  {
-    id: 8,
-    text:'8. Test both solutions for the presence of glucose using the Benedict’s test. Pour 2 ml of each solution into separate test tubes and add 1 ml of Benedict’s solution. Heat the solutions in a water bath for about five minutes and record the change in colour.'
-  },
-  // Add more procedures as needed
-];
-
-const images = {
-  icebath: require('./apparatus/icebath.png'),
-  beaker: require('./apparatus/beaker.png'),
-  testtube: require('./apparatus/testtube.png'),
-  viskingtube: require('./apparatus/viskingtube.png'),
-  viskingtubeinbeaker: require('./apparatus/viskingtubeinbeaker.png')
-
-  // Add more as needed
-};
-
 const ES_LandingPage = ({ navigation }) => {
   const [activeProcedure, setActiveProcedure] = useState(0);
-  const [combined, setCombined] = useState(false);
+  const [combined, setCombined] = useState({});
+
+  const procedures = [
+    {
+      id: 1,
+      text:
+        '1. Apply a thin layer of transparent nail varnish on an area of 5mm x 5mm on the upper surface of the hibiscus leaf and water lily plant.',
+      apparatus: ['hibiscus', 'waterlily', 'nail_varnish', 'nail_varnish'],
+    },
+    {
+      id: 2,
+      text:
+        '2. Allow the varnished leaves to dry.',
+      apparatus: ['hibiscus', 'waterlily', 'sun'],
+    },
+    {
+      id: 3,
+      text:
+        '3. Carefully peel off the layer of nail varnish from the surface of the leaves using a pair of forceps.',
+      apparatus: ['hibiscus', 'waterlily', 'forceps'],
+    },
+    {
+      id: 4,
+      text:
+        '4. Place the peeled-off layer of nail varnish in a drop of water on a microscope slide.',
+      apparatus: ['nailvarnishstroke', 'm_slip'],
+    },
+    {
+      id: 5,
+      text:
+        '5. Cover the slide with a cover slip.',
+      apparatus: ['m_slip', 'm_slip'],
+    },
+    {
+      id: 6,
+      text:
+        '6. Observe the surface of the hibiscus leaf and water lily leaf using low power on a microscope.',
+      apparatus: ['microscope', 'hibiscus', 'waterlily'],
+    },
+    {
+      id: 7, 
+      text:
+        '7. Count and record the number of stomata present.',
+      apparatus: ['microscope', 'hibiscus', 'waterlily'],
+    },
+    // Add more procedures as needed
+  ];
+
+  const images = {
+    nail_varnish: require('./apparatus/nailvarnish.png'),
+    hibiscus: require('./apparatus/hibiscus.png'),
+    waterlily: require('./apparatus/waterlily.png'),
+    m_slip: require('./apparatus/m_slip.png'),
+    forceps: require('./apparatus/forceps.png'),
+    nailvarnishstroke: require('./apparatus/nailvarnishstroke.png'),
+    sun: require('./apparatus/sun.png'),
+    microscope: require('./apparatus/microscope.png'),
+
+
+
+
+    // Add more as needed
+  };
+
+
+  const combinationRules = {
+    1: {
+      'nailvarnish': {
+        target: 'waterlily',
+        combinedImage: 'nailvarnishstroke'
+      },
+      'nailvarnish': {
+        target: 'hibiscus',
+        combinedImage: 'nailvarnishstroke'
+      }
+    },
+    2: {
+      'nailvarnish': {
+        target: 'hibiscus',
+        combinedImage: 'nailvarnishstroke'
+      }
+    },
+    // ...
+  };
+
+  const handleCombination = (apparatus, targetApparatus, procedureId, event) => {
+    const rule = combinationRules[procedureId]?.[apparatus];
+
+    if (rule && targetApparatus === rule.target) {
+      // Adjust these coordinates to match your drop zone
+      if (event.nativeEvent.pageX > 200 && event.nativeEvent.pageX < 900 && 
+          event.nativeEvent.pageY > 500 && event.nativeEvent.pageY < 700) {
+        setCombined((prev) => ({
+          ...prev,
+          [procedureId]: rule.combinedImage
+        }));
+      }
+    }
+  };
 
   const handleNextProcedure = () => {
     if (activeProcedure < procedures.length - 1) {
       setActiveProcedure(activeProcedure + 1);
-      setCombined(false); // Add this line
+      // setCombined(false); // Add this line
     }
   };
   
   const handlePrevProcedure = () => {
     if (activeProcedure > 0) {
       setActiveProcedure(activeProcedure - 1);
-      setCombined(false); // Add this line
+      // setCombined(false); // Add this line
     }
   };
 
@@ -87,18 +129,18 @@ const ES_LandingPage = ({ navigation }) => {
           <View style={styles.dropZone} />
 
           <View style={styles.draggableContainer}>
-          {procedures[activeProcedure]?.apparatus?.map((apparatus, index) => (
+            {procedures[activeProcedure]?.apparatus?.map((apparatus, index) => (
               <Draggable 
                 key={index} 
-                style={styles.draggableItem}
+                // style={styles.draggableItem}
                 onDragRelease={(event) => {
-                  // Check if viskingtube has been dragged onto beaker
-                  if (apparatus === 'viskingtube' && activeProcedure === 1 && event.nativeEvent.pageX > 500 && event.nativeEvent.pageX < 500 && event.nativeEvent.pageY > 500 && event.nativeEvent.pageY < 500) {
-                    setCombined(true);
-                  }
+                  handleCombination(apparatus, 'nailvarnish', activeProcedure, event); // Adjust 'beaker' to your needs
                 }}
               >
-                <Image source={combined && apparatus === 'beaker' ? images.viskingtubeinbeaker : images[apparatus]} style={styles.image} />
+                <Image 
+                  source={combined[activeProcedure] === apparatus ? images[combined[activeProcedure]] : images[apparatus]} 
+                  style={styles.image} 
+                />
               </Draggable>
             ))}
           </View>
@@ -120,6 +162,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  overlay: {
+    position: 'absolute',
+    top: 50, // Adjust the position as needed
+    left: 100,
+    opacity: 0.7, // Set the desired opacity
   },
   dropZone: {
     width: 500,

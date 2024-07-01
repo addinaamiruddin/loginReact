@@ -1,46 +1,68 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { ScrollView, View, Text, StyleSheet } from 'react-native';
-import Draggable from 'react-native-draggable';
 import Header2 from '../Header2';
-import ArrowButtonNext from '../components/ArrowButtonNext'
+import ArrowButtonNext from '../components/ArrowButtonNext';
 import { supabase } from '../../lib/supabase';
+
+const dummyExperiment = {
+  num1: 'A thin layer of transparent nail varnish is applied on an area of 5mm x 5mm on the upper surface of the hibiscus leaf and water lily plant.',
+  num2: 'The varnished leaves are left to dry.',
+  num3: 'The layer of nail varnish is peeled off the surface of the leaves with a pair of forceps.',
+  num4: 'The layer of nail varnish is placed in a drop of water on the microscope slide.',
+  num5: 'A cover slip is used to cover the slide.',
+  num6: 'The surface of the hibiscus leaf and water lily leaf is observed using low power.',
+  num7: 'The number of stomata present is counted and recorded.',
+};
 
 const ES_procedure = ({ route, navigation }) => {
   const id = route.params.id; // Get the id from the route parameters
 
-  console.log(id);
-
-  const [procedureSet, setProcedureSet] = useState(null);
+  const [procedureSet, setProcedureSet] = useState(dummyExperiment);
 
   const fetchProcedureSet = async (id) => {
     const { data, error } = await supabase.from('exp_procedure_set').select().eq('exp_id', id);
-    if (error) console.log("Data fetching error: ", error)
-    else setProcedureSet(data[0]);
+    if (error) console.log("Data fetching error: ", error);
+    else setProcedureSet(data[0] || dummyExperiment); // Use dummyExperiment if data[0] is undefined
   };
 
   useEffect(() => {
     fetchProcedureSet(1); // Fetch procedure set with exp_id=id
   }, []);
 
-  console.log(procedureSet);
-
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <>
         <Header2 navigation={navigation} />
-        {procedureSet && procedureSet.map((procedure, index) => (
-          <View key={index} style={styles.procedureItem}>
-            <Text style={styles.instructionNum}>{procedure.instruction_num}</Text>
-            <Text style={styles.instruction}>{procedure.instruction}</Text>
-          </View>
-        ))}
+        <Text style={styles.container}>
+          <Text style={styles.heading}>Procedures:</Text>
+          {'\n\n'}
+          <Text style={styles.step}>1: </Text>
+          {procedureSet.num1}
+          {'\n\n'}
+          <Text style={styles.step}>2: </Text>
+          {procedureSet.num2}
+          {'\n\n'}
+          <Text style={styles.step}>3: </Text>
+          {procedureSet.num3}
+          {'\n\n'}
+          <Text style={styles.step}>4: </Text>
+          {procedureSet.num4}
+          {'\n\n'}
+          <Text style={styles.step}>5: </Text>
+          {procedureSet.num5}
+          {'\n\n'}
+          <Text style={styles.step}>6: </Text>
+          {procedureSet.num6}
+          {'\n\n'}
+          <Text style={styles.step}>7: </Text>
+          {procedureSet.num7}
+          {'\n\n'}
+        </Text>
         <ArrowButtonNext onPress={() => navigation.navigate('startExperiment')} />
       </>
     </ScrollView>
-  )
-}
-
-// <ArrowButtonNext onPress={() => navigation.navigate('startExperiment')}/>
+  );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -63,7 +85,10 @@ const styles = StyleSheet.create({
       flexGrow: 1,
       justifyContent: 'center',
     },
- 
+    heading: {
+      textDecorationLine: 'underline',
+      fontSize: 20,
+    },
   });
 
 export default ES_procedure
