@@ -5,6 +5,9 @@ import Header2 from '../Header2';
 import ArrowButtonNext from '../components/ArrowButtonNext';
 import ArrowButtonPrevious from '../components/ArrowButtonPrevious';
 import { Slide } from 'react-slideshow-image';
+import COLORS from '../constants/COLORS';
+import FinishButton from '../components/FinishButton';
+
 
 const slides = [
   {
@@ -91,7 +94,9 @@ const SS_LandingPage = ({ navigation }) => {
       <>
         <Header2 navigation={navigation} />
         <View style={styles.container}>
-          <Text style={{padding:10}} >Swipe for next slide</Text>
+      <FinishButton navigation={navigation} /> {/* Add the FinishButton */}
+
+          <Text style={{padding:10, paddingTop:10}} >Swipe for next slide</Text>
         <Carousel
           data={slides}
           renderItem={renderItem}
@@ -119,8 +124,8 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   image: {
-    width: 500,
-    height: 400,
+    width: 350,
+    height: 300,
     resizeMode:'contain'
   },
   input: {
@@ -133,7 +138,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   buttonContainer: {
-    backgroundColor: 'green',
+    backgroundColor: COLORS.primary,
     margin:25,
     padding: 10,
     borderRadius: 8,

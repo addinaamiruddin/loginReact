@@ -105,26 +105,35 @@ const TeacherDashboard = ({ navigation, session }: { navigation: any, session: S
     scrollViewContent: {
       flexGrow: 1,
     },
+    divider: {
+      borderBottomWidth: 1,
+      borderBottomColor: COLORS.darkGrey,
+      width: '100%',
+      marginVertical: 10,
+    },
     rectangle: {
       backgroundColor: COLORS.gray,
       margin: 35,
-      padding: 20,
+      padding: 10,
       borderRadius: 20,
-      alignItems:'center',
+      alignItems: 'center',
     },
-    rectangle2:{
+    rectangle2: {
       backgroundColor: COLORS.gray,
       margin: 35,
       padding: 20,
       borderRadius: 20,
     },
-    rectangle1:{
+    rectangle1: {
       backgroundColor: COLORS.gray,
       margin: 35,
       padding: 20,
       borderRadius: 20,
       flexDirection: 'row',
-      alignItems:'center',
+      alignItems: 'center',
+      justifyContent: 'space-around', // Evenly space buttons
+      // paddingVertical: 10, // Add vertical padding to keep them inside the container
+      flexWrap: 'wrap', // Allow wrapping if needed
     },
     editProfileIcon: {
       position: "absolute",
@@ -155,9 +164,12 @@ const TeacherDashboard = ({ navigation, session }: { navigation: any, session: S
       marginTop: 10,
       alignSelf: "center",
     },
-    progressSection: {
-      marginBottom: 10,
-    flexDirection: 'row',
+    newProgress: {
+      flexDirection: 'row',
+      justifyContent: 'space-around', // Evenly space buttons
+      alignItems: 'center', // Center buttons vertically within the section
+      // paddingVertical: 10, // Add vertical padding to keep them inside the container
+      flexWrap: 'wrap', // Allow wrapping if needed
     },
     sectionLabel: {
       fontSize: 22,
@@ -198,64 +210,74 @@ const TeacherDashboard = ({ navigation, session }: { navigation: any, session: S
           <Text style={styles.sectionTitle}>Track Progress</Text>
 
           <View style={styles.rectangle}>
-  {/* Flashcards Progress */}
-  <View style={styles.progressSection}>
-    <ButtonFeature title="Flashcards" onPress={undefined} />
-    <ButtonTrack
-      title="By Topic"
-      onPress={() => navigation.navigate("ByTopic", { feature: "Flashcards" })}
-    />
-    <ButtonTrack
-      title="By Class"
-      onPress={() => navigation.navigate("ByClass", { feature: "Flashcards" })}
-    />
-  </View>
-  {/* Slideshows Progress */}
-  <View style={styles.progressSection}>
-    <ButtonFeature title="Slideshow" onPress={undefined} />
-    <ButtonTrack
-      title="By Topic"
-      onPress={() => navigation.navigate("ByTopic", { feature: "Slideshow" })}
-    />
-    <ButtonTrack
-      title="By Class"
-      onPress={() => navigation.navigate("ByClass", { feature: "Slideshow" })}
-    />
-  </View>
-  {/* Experiment Simulation Progress */}
-  <View style={styles.progressSection}>
-    <ButtonFeature title="Experiment" onPress={undefined} />
-    <ButtonTrack
-      title="By Topic"
-      onPress={() => navigation.navigate("ByTopic", { feature: "Experiment" })}
-    />
-    <ButtonTrack
-      title="By Class"
-      onPress={() => navigation.navigate("ByClass", { feature: "Experiment" })}
-    />
-  </View>
-</View>
+            {/* Flashcards Progress */}
+            <View style={styles.progressSection}>
+              <ButtonFeature title="Flashcards" onPress={undefined} />
+              <View style={styles.newProgress}>
+                <ButtonTrack
+                title="By Topic"
+                onPress={() => navigation.navigate("ByTopic", { feature: "Flashcards" })}
+              />
+              <ButtonTrack
+                title="By Class"
+                onPress={() => navigation.navigate("ByClass", { feature: "Flashcards" })}
+              />
+              </View>              
+            </View>
+            <View style={styles.divider}></View>
 
+
+            {/* Slideshows Progress */}
+            <View style={styles.progressSection}>
+              <ButtonFeature title="Slideshow" onPress={undefined} />
+              <View style={styles.newProgress}>
+                <ButtonTrack
+                title="By Topic"
+                onPress={() => navigation.navigate("ByTopic", { feature: "Slideshow" })}
+              />
+              <ButtonTrack
+                title="By Class"
+                onPress={() => navigation.navigate("ByClass", { feature: "Slideshow" })}
+              />
+              </View>
+            </View>
+            <View style={styles.divider}></View>
+
+            {/* Experiment Simulation Progress */}
+            <View style={styles.progressSection}>
+              <ButtonFeature title="Experiment" onPress={undefined} />
+              <View style={styles.newProgress}>
+                <ButtonTrack
+                title="By Topic"
+                onPress={() => navigation.navigate("ByTopic", { feature: "Experiment" })}
+              />
+              <ButtonTrack
+                title="By Class"
+                onPress={() => navigation.navigate("ByClass", { feature: "Experiment" })}
+              />
+              </View>
+              
+            </View>
+          </View>
 
           <Text style={styles.sectionTitle}>Content Management</Text>
 
           {/* Third rectangle */}
           <View style={styles.rectangle1}>
             <View style={styles.progressSection}>
-              <ButtonFeature 
-                title="Flashcards" 
-                onPress={() => navigation.navigate("AddFC")}/>
+              <ButtonFeature
+                title="Flashcards"
+                onPress={() => navigation.navigate("AddFC")} />
             </View>
             <View style={styles.progressSection}>
-              <ButtonFeature 
-                title="Slideshow" 
-                onPress={() => navigation.navigate("AddSS")}/>
+              <ButtonFeature
+                title="Slideshow"
+                onPress={() => navigation.navigate("AddSS")} />
             </View>
             <View style={styles.progressSection}>
-              <ButtonFeature 
-                title="Experiment" 
-                onPress={() => navigation.navigate("AddES")}/>
-
+              <ButtonFeature
+                title="Experiment"
+                onPress={() => navigation.navigate("AddES")} />
             </View>
           </View>
         </SafeAreaView>

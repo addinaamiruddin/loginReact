@@ -1,12 +1,12 @@
-import Draggable from 'react-native-draggable';
-import Header2 from '../Header2';
-import ArrowButtonNext from '../components/ArrowButtonNext';
-import ArrowButtonPrevious from '../components/ArrowButtonPrevious';
 import React, { useState } from 'react';
 import { ScrollView, View, Image, StyleSheet, Text, Alert } from 'react-native';
+import Draggable from 'react-native-draggable';
+import ArrowButtonNext from '../components/ArrowButtonNext';
+import ArrowButtonPrevious from '../components/ArrowButtonPrevious';
 import FinishButton from '../components/FinishButton';
+import Header2 from '../Header2';
 
-const ES_LandingPage = ({ navigation }) => {
+const ExperimentScreen = ({ navigation }) => {
   const [combined, setCombined] = useState({}); // Tracks combined state for each procedure
   const [activeProcedure, setActiveProcedure] = useState(0); // Active procedure index
 
@@ -150,7 +150,7 @@ const ES_LandingPage = ({ navigation }) => {
       <Header2 navigation={navigation} />
 
       <View style={styles.container}>
-      <FinishButton navigation={navigation} /> {/* Add the FinishButton */}
+      <FinishButton onPress={handleExitChapter} /> {/* Add the FinishButton */}
 
         <View style={styles.dropZone} />
 
@@ -234,4 +234,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ES_LandingPage;
+export default ExperimentScreen;

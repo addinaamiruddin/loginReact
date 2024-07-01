@@ -30,6 +30,7 @@ import TeacherDashboard from "./app/screens/admin/TeacherDashboard";
 import ByClass from "./app/screens/admin/ByClass";
 import ByTopic from "./app/screens/admin/ByTopic";
 import AddES from "./app/screens/admin/AddES";
+import ExperimentScreen from "./app/screens/experiment/ExperimentScreen";
 
 
 const Stack = createNativeStackNavigator();
@@ -149,6 +150,11 @@ export default function App() {
           <Stack.Screen
           name="ByTopic"
           component={ByTopic}
+          options={{headerShown:false}}
+          />
+          <Stack.Screen
+          name="ExperimentScreen"
+          component={ExperimentScreen}
           options={{headerShown:false}}
           />
       </Stack.Navigator>

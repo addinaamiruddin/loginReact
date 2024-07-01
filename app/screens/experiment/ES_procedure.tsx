@@ -3,6 +3,7 @@ import { ScrollView, View, Text, StyleSheet } from 'react-native';
 import Header2 from '../Header2';
 import ArrowButtonNext from '../components/ArrowButtonNext';
 import { supabase } from '../../lib/supabase';
+import FinishButton from '../components/FinishButton';
 
 const dummyExperiment = {
   num1: 'A thin layer of transparent nail varnish is applied on an area of 5mm x 5mm on the upper surface of the hibiscus leaf and water lily plant.',
@@ -34,6 +35,8 @@ const ES_procedure = ({ route, navigation }) => {
       <>
         <Header2 navigation={navigation} />
         <Text style={styles.container}>
+      <FinishButton navigation={navigation} /> {/* Add the FinishButton */}
+
           <Text style={styles.heading}>Procedures:</Text>
           {'\n\n'}
           <Text style={styles.step}>1: </Text>
@@ -69,9 +72,10 @@ const styles = StyleSheet.create({
       flex: 1,
       padding: 50,
       backgroundColor: 'white',
+      fontSize:18
     },
     title: {
-      fontSize: 20,
+      fontSize: 18,
       fontWeight: 'bold',
       marginBottom: 20,
       textAlign:'center'
@@ -89,6 +93,9 @@ const styles = StyleSheet.create({
       textDecorationLine: 'underline',
       fontSize: 20,
     },
+    step:{
+      fontSize:16
+    }
   });
 
 export default ES_procedure

@@ -3,6 +3,7 @@ import { ScrollView, View, Text, StyleSheet } from 'react-native';
 import Draggable from 'react-native-draggable';
 import Header2 from '../Header2';
 import ArrowButtonNext from '../components/ArrowButtonNext';
+import FinishButton from '../components/FinishButton';
 
 // Dummy experiment data (replace with actual data from Supabase)
 const dummyExperiment = {
@@ -37,6 +38,9 @@ const ES_experimentdetails = ({ route, navigation }) => {
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <Header2 navigation={navigation} />
       <View style={styles.container}>
+        
+      <FinishButton navigation={navigation} /> {/* Add the FinishButton */}
+
         <Text style={styles.title}>{experiment.exp_title}</Text>
         <Text style={styles.paragraph}>
           <Text style={styles.heading}>Aim:</Text> {'\n'}
@@ -59,8 +63,9 @@ const ES_experimentdetails = ({ route, navigation }) => {
           <Text style={styles.heading}>Apparatus:</Text> {'\n'}
           {experiment.apparatus}
         </Text>
-        <ArrowButtonNext onPress={() => navigation.navigate('procedure', { id: 2 })} />
       </View>
+      <ArrowButtonNext onPress={() => navigation.navigate('procedure', { id: 2 })} />
+
     </ScrollView>
   );
 };
@@ -68,18 +73,19 @@ const ES_experimentdetails = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 50,
+    paddingHorizontal: 50,
     backgroundColor: 'white',
   },
   title: {
-    fontSize: 20,
+    fontSize: 19,
     fontWeight: 'bold',
     marginBottom: 20,
     textAlign: 'center',
   },
   heading: {
     textDecorationLine: 'underline',
-    fontSize: 20,
+    fontSize: 17,
+    marginBottom:20
   },
   paragraph: {
     fontSize: 16,

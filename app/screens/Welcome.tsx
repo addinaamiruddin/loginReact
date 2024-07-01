@@ -1,14 +1,10 @@
-import { View, Text, Pressable, Image } from "react-native";
+import { View, Text } from "react-native";
 import React from "react";
-import { LinearGradient } from "expo-linear-gradient";
 import COLORS from "./constants/COLORS";
 import Button from "./components/Button";
 import Header from "./Header";
-import Login from "./Login";
-import SignUp from "./SignUp";
-import App from "../../App";
 
-const Welcome = ({ navigation }: any) => {
+const Welcome = ({ navigation }) => {
   return (
     <>
       <Header />
@@ -47,7 +43,6 @@ const Welcome = ({ navigation }: any) => {
               marginTop: 18,
               marginBottom: 4,
             }}
-            
           />
 
           <View

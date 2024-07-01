@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Button } from 're
 import Header2 from '../Header2';
 import ArrowButtonNext from '../components/ArrowButtonNext';
 import ArrowButtonPrevious from '../components/ArrowButtonPrevious';
+import FinishButton from '../components/FinishButton';
 
 const FC_LandingPage = ({ navigation }) => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -93,6 +94,8 @@ const FC_LandingPage = ({ navigation }) => {
         <Header2 navigation={navigation} />
         
         <View style={styles.container}>
+      <FinishButton navigation={navigation} /> {/* Add the FinishButton */}
+
         <Text style={styles.cardNum}>
               Card {currentCardIndex + 1} of {flashcards.length}
             </Text>
@@ -101,32 +104,7 @@ const FC_LandingPage = ({ navigation }) => {
               {isFlipped ? currentFlashcard.answer : currentFlashcard.question}
             </Text>
           </TouchableOpacity>
-          <View style={styles.navigation}>
-            <Text>Rate Difficulty : </Text>
-          <Button
-              title="1"
-              // onPress={}
-              filled
-              style={{padding:40}}
-              color={'#9F2B68'}
-            />
-            <Button
-            title="2"
-            // onPress={}
-            filled
-            style={{ padding:40 }}
-            color={'#9F2B68'}
-            />
-          <Button
-          title="3"
-          // onPress={}
-          filled
-          style={{ padding:40 }}
-          color={'#9F2B68'}
-
-          />
-          </View>
-          
+                
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <ArrowButtonPrevious onPress={handlePreviousCard} />
               <ArrowButtonNext onPress={handleNextCard} />
@@ -147,8 +125,8 @@ const styles = StyleSheet.create({
     paddingBottom:20
   },
   card: {
-    width: 400,
-    height: 300,
+    width: 300,
+    height: 200,
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',

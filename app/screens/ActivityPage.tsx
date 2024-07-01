@@ -71,7 +71,8 @@ const ActivityPage = ({ navigation, route }) => {
 
                         <Button
                             title="Experiment Simulation"
-                            onPress={() => navigation.navigate('openExperiment', { id: 1 })}
+                            // onPress={() => navigation.navigate('openExperiment', { id: 1 })}
+                            onPress={() => navigation.navigate('openExperiment')}
                             filled
                             style={{
                                 marginTop: 18,

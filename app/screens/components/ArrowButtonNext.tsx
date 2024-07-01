@@ -7,7 +7,7 @@ import COLORS from '../constants/COLORS';
 const ArrowButtonNext = ({ onPress }) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Text style={styles.buttonText}>Next Page</Text>
+      <Text style={styles.buttonText}>Next</Text>
     </TouchableOpacity>
   );
 };
