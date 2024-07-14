@@ -150,7 +150,7 @@ const ExperimentScreen = ({ navigation }) => {
       <Header2 navigation={navigation} />
 
       <View style={styles.container}>
-      <FinishButton onPress={handleExitChapter} /> {/* Add the FinishButton */}
+      <FinishButton onPress={handleExitChapter} /> 
 
         <View style={styles.dropZone} />
 

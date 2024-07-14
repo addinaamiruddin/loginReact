@@ -19,26 +19,26 @@ const slides = [
   {
     id: 2,
     image: require('./images/chapter1_02.jpg'), // Replace with your image paths
-    question: 'Questions 2?',
-    answer: 'answer2',
+    question: 'Main cell for photosynthesis?',
+    answer: 'chloroplast',
   },
   {
     id: 3,
     image: require('./images/chapter1_03.jpg'), // Replace with your image paths
-    question: 'Questions 3?',
-    answer: 'answer3',
+    question: 'Answer for question above?',
+    answer: 'xylem and phloem',
   },
   {
     id: 4,
     image: require('./images/chapter1_04.jpg'), // Replace with your image paths
-    question: 'Questions 4?',
-    answer: 'answer4',
+    question: 'What does the plants transport?',
+    answer: 'water and nutrients',
   },
   {
     id: 5,
     image: require('./images/chapter1_05.jpg'), // Replace with your image paths
-    question: 'Questions 5?',
-    answer: 'answer5',
+    question: 'Where can you find the vascular tissue?',
+    answer: 'stem',
   },
 ];
 
@@ -94,7 +94,7 @@ const SS_LandingPage = ({ navigation }) => {
       <>
         <Header2 navigation={navigation} />
         <View style={styles.container}>
-      <FinishButton navigation={navigation} /> {/* Add the FinishButton */}
+      <FinishButton navigation={navigation} /> 
 
           <Text style={{padding:10, paddingTop:10}} >Swipe for next slide</Text>
         <Carousel

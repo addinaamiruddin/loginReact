@@ -35,7 +35,7 @@ const ES_procedure = ({ route, navigation }) => {
       <>
         <Header2 navigation={navigation} />
         <Text style={styles.container}>
-      <FinishButton navigation={navigation} /> {/* Add the FinishButton */}
+      <FinishButton navigation={navigation} /> 
 
           <Text style={styles.heading}>Procedures:</Text>
           {'\n\n'}

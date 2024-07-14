@@ -18,7 +18,7 @@ const dummyExperiment = {
 };
 
 const ES_experimentdetails = ({ route, navigation }) => {
-  const id = route.params.id; // Get the id from the route parameters
+  // const id = route.params.id; // Get the id from the route parameters
 
   // Use dummyExperiment as initial state
   const [experiment, setExperiment] = useState(dummyExperiment);
@@ -39,7 +39,7 @@ const ES_experimentdetails = ({ route, navigation }) => {
       <Header2 navigation={navigation} />
       <View style={styles.container}>
         
-      <FinishButton navigation={navigation} /> {/* Add the FinishButton */}
+      <FinishButton navigation={navigation} /> 
 
         <Text style={styles.title}>{experiment.exp_title}</Text>
         <Text style={styles.paragraph}>

@@ -31,6 +31,7 @@ import ByClass from "./app/screens/admin/ByClass";
 import ByTopic from "./app/screens/admin/ByTopic";
 import AddES from "./app/screens/admin/AddES";
 import ExperimentScreen from "./app/screens/experiment/ExperimentScreen";
+import FC_MemoryGame from "./app/screens/flashcards/FC_MemoryGame";
 
 
 const Stack = createNativeStackNavigator();
@@ -155,6 +156,11 @@ export default function App() {
           <Stack.Screen
           name="ExperimentScreen"
           component={ExperimentScreen}
+          options={{headerShown:false}}
+          />
+          <Stack.Screen
+          name="MemoryGame"
+          component={FC_MemoryGame}
           options={{headerShown:false}}
           />
       </Stack.Navigator>

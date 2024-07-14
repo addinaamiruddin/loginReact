@@ -45,7 +45,7 @@ const ES_LandingPage = ({ navigation }) => {
       id: 6,
       text:
         '6. Observe the surface of the hibiscus leaf and water lily leaf using low power on a microscope.',
-      apparatus: ['microscope1', 'microscope2', 'hibiscus', 'waterlily'],
+      apparatus: ['microscope2', 'hibiscus', 'waterlily', 'microscope1'],
     },
     {
       id: 7, 
@@ -113,8 +113,8 @@ const ES_LandingPage = ({ navigation }) => {
     // id:5
     'm_slip_m_slip':'m_slip',
     // id:6
-    'microscope_hibiscus': 'dicot',
-    'microscope_waterlily': 'monocot',
+    'microscope1_hibiscus': 'dicot',
+    'microscope2_waterlily': 'monocot',
     // id:7 - none
   };
 
@@ -150,7 +150,7 @@ const ES_LandingPage = ({ navigation }) => {
       <Header2 navigation={navigation} />
 
       <View style={styles.container}>
-      <FinishButton navigation={navigation} /> {/* Add the FinishButton */}
+      <FinishButton navigation={navigation} /> 
 
         <View style={styles.dropZone} />
 
